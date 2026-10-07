@@ -67,14 +67,12 @@ function! s:GlowLivePreviewWezterm() abort
 endfunction
 
 " ---------------------------------------------------------------------
-" Live preview (tmux, through vim-tbone's :Tmux)
+" Live preview (tmux)
 " ---------------------------------------------------------------------
 
 function! s:GlowLivePreviewTmux() abort
-  execute printf(
-        \ "Tmux split-window -d -h 'echo %s | entr -c glow -t -l /_'",
-        \ shellescape(expand('%:p'))
-        \ )
+  let l:cmd = 'echo ' . shellescape(expand('%:p')) . ' | entr -c glow -t -l /_'
+  call system('tmux split-window -d -h ' . shellescape(l:cmd))
 endfunction
 
 " ---------------------------------------------------------------------
